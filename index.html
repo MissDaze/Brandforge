@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BrandForge Dev Access</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #1A1A1A;
+      --accent: #F5A623;
+      --background: #F9F9F9;
+      --text: #333;
+      --muted: #777;
+      --card-bg: #fff;
+      --shadow: rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--background);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    header img {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+    }
+
+    header h1 {
+      font-size: 32px;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 16px;
+      color: var(--muted);
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      padding: 32px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px var(--shadow);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .card h2 {
+      font-size: 24px;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e6951f;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 24px;
+      }
+
+      header h1 {
+        font-size: 24px;
+      }
+
+      .card h2 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="https://via.placeholder.com/64x64.png?text=B" alt="BrandForge Logo" />
+    <h1>BrandForge</h1>
+    <p>AI-powered branding kits for startups and creators</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Dev Access</h2>
+      <p>Subscribe to unlock early access to branding tools and asset generation.</p>
+      <button id="subscribeBtn">Subscribe Now</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 BrandForge. Built by Kristy.</p>
+  </footer>
+
+  <script>
+    document.getElementById('subscribeBtn').addEventListener('click', async () => {
+      try {
+        const res = await fetch('http://localhost:4242/create-dev-session', {
+          method: 'POST'
+        });
+        const data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          alert('Error creating Stripe session.');
+        }
+      } catch (err) {
+        console.error('Frontend error:', err);
+        alert('Something went wrong. Check your backend connection.');
+      }
+    });
+  </script>
+
+</body>
+</html>
